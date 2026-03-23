@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    activity_power.xml — Giao diện tính luỹ thừa & số mũ
+    Nhập cơ số và số mũ → hiển thị kết quả
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/quadratic_bg">
+
+    <!-- HEADER -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_header_gradient"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="Quay lại"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:textAllCaps="false"
+            android:backgroundTint="#33FFFFFF"
+            android:minWidth="0dp"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            app:cornerRadius="18dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnBack"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingTop="12dp"
+            android:paddingBottom="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Luỹ Thừa &amp; Số Mũ"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tính aⁿ — Ví dụ: 2³ = 8"
+                android:textColor="#B3FFFFFF"
+                android:textSize="15sp"
+                android:paddingTop="6dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- PHẦN NHẬP -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nhập cơ số và số mũ"
+                android:textColor="@color/quadratic_text"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:paddingBottom="14dp" />
+
+            <!-- Cơ số và Số mũ nằm ngang -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingBottom="16dp">
+
+                <!-- Cơ số -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cơ số (a)"
+                        android:textColor="@color/quadratic_accent"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:paddingBottom="6dp" />
+
+                    <EditText
+                        android:id="@+id/etBase"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="VD: 2"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/quadratic_hint"
+                        android:textSize="20sp"
+                        android:inputType="numberDecimal|numberSigned"
+                        android:background="@drawable/bg_edit_text"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <!-- Ký hiệu ^ -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="^"
+                    android:textColor="@color/white"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:paddingTop="20dp" />
+
+                <!-- Số mũ -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Số mũ (n)"
+                        android:textColor="@color/quadratic_accent"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:paddingBottom="6dp" />
+
+                    <EditText
+                        android:id="@+id/etExponent"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="VD: 3"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/quadratic_hint"
+                        android:textSize="20sp"
+                        android:inputType="numberDecimal|numberSigned"
+                        android:background="@drawable/bg_edit_text"
+                        android:gravity="center" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Nút hành động -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="20dp">
+
+                <Button
+                    android:id="@+id/btnCalculate"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="2"
+                    android:layout_marginEnd="8dp"
+                    android:text="Tính kết quả"
+                    android:textSize="15sp"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/quadratic_accent"
+                    android:textColor="@color/white"
+                    app:cornerRadius="14dp" />
+
+                <Button
+                    android:id="@+id/btnClearForm"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="Xoá"
+                    android:textSize="15sp"
+                    android:textAllCaps="false"
+                    android:backgroundTint="#33FFFFFF"
+                    android:textColor="@color/quadratic_text"
+                    app:cornerRadius="14dp" />
+            </LinearLayout>
+
+            <!-- Kết quả -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_result_card"
+                android:padding="20dp"
+                android:minHeight="100dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Kết quả"
+                    android:textColor="@color/quadratic_hint"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="10dp" />
+
+                <TextView
+                    android:id="@+id/tvPowerResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:lineSpacingExtra="6dp"
+                    android:text="Chưa có kết quả"
+                    android:gravity="start" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

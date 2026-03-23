@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    activity_quadratic.xml — Giao diện giải phương trình bậc 2
+    Bao gồm:
+    - Header với gradient background + nút quay lại
+    - Công thức hiển thị: ax² + bx + c = 0
+    - 3 ô nhập hệ số a, b, c
+    - Nút Giải và Xoá
+    - Vùng hiển thị kết quả
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/quadratic_bg">
+
+    <!-- ============================================ -->
+    <!-- HEADER — Gradient background + nút quay lại -->
+    <!-- ============================================ -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_header_gradient"
+        android:padding="16dp">
+
+        <!-- Nút quay lại màn hình chính -->
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="Quay lại"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:textAllCaps="false"
+            android:backgroundTint="#33FFFFFF"
+            android:minWidth="0dp"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp"
+            app:cornerRadius="18dp" />
+
+        <!-- Tiêu đề + công thức ở giữa -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnBack"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingTop="12dp"
+            android:paddingBottom="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giải phương trình bậc 2"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ax² + bx + c = 0"
+                android:textColor="#B3FFFFFF"
+                android:textSize="15sp"
+                android:paddingTop="6dp"
+                android:letterSpacing="0.08" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- ============================================ -->
+    <!-- PHẦN NHẬP HỆ SỐ + KẾT QUẢ                  -->
+    <!-- ============================================ -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Label: Nhập hệ số -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nhập các hệ số"
+                android:textColor="@color/quadratic_text"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:paddingBottom="14dp" />
+
+            <!-- 3 ô nhập nằm ngang trên cùng 1 hàng -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingBottom="16dp">
+
+                <!-- Ô a -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="6dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="a"
+                        android:textColor="@color/quadratic_accent"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingBottom="6dp" />
+
+                    <EditText
+                        android:id="@+id/etA"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="0"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/quadratic_hint"
+                        android:textSize="18sp"
+                        android:inputType="numberDecimal|numberSigned"
+                        android:background="@drawable/bg_edit_text"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <!-- Ô b -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="b"
+                        android:textColor="@color/quadratic_accent"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingBottom="6dp" />
+
+                    <EditText
+                        android:id="@+id/etB"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="0"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/quadratic_hint"
+                        android:textSize="18sp"
+                        android:inputType="numberDecimal|numberSigned"
+                        android:background="@drawable/bg_edit_text"
+                        android:gravity="center" />
+                </LinearLayout>
+
+                <!-- Ô c -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="6dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="c"
+                        android:textColor="@color/quadratic_accent"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:paddingBottom="6dp" />
+
+                    <EditText
+                        android:id="@+id/etC"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:hint="0"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/quadratic_hint"
+                        android:textSize="18sp"
+                        android:inputType="numberDecimal|numberSigned"
+                        android:background="@drawable/bg_edit_text"
+                        android:gravity="center" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- ============================================ -->
+            <!-- CÁC NÚT HÀNH ĐỘNG: Giải | Xoá              -->
+            <!-- ============================================ -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="20dp">
+
+                <!-- Nút Giải phương trình -->
+                <Button
+                    android:id="@+id/btnSolve"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="2"
+                    android:layout_marginEnd="8dp"
+                    android:text="Giải phương trình"
+                    android:textSize="15sp"
+                    android:textAllCaps="false"
+                    android:backgroundTint="@color/quadratic_accent"
+                    android:textColor="@color/white"
+                    app:cornerRadius="14dp" />
+
+                <!-- Nút Xoá form -->
+                <Button
+                    android:id="@+id/btnClearForm"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:text="Xoá"
+                    android:textSize="15sp"
+                    android:textAllCaps="false"
+                    android:backgroundTint="#33FFFFFF"
+                    android:textColor="@color/quadratic_text"
+                    app:cornerRadius="14dp" />
+            </LinearLayout>
+
+            <!-- ============================================ -->
+            <!-- VÙNG HIỂN THỊ KẾT QUẢ                       -->
+            <!-- ============================================ -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/bg_result_card"
+                android:padding="20dp"
+                android:minHeight="120dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Kết quả"
+                    android:textColor="@color/quadratic_hint"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="10dp" />
+
+                <TextView
+                    android:id="@+id/tvQuadraticResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:lineSpacingExtra="6dp"
+                    android:text="Chưa có kết quả"
+                    android:gravity="start" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

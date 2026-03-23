@@ -2,4 +2,54 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- ============================================ -->
+    <!-- Bảng màu chính (Modern Light Theme)          -->
+    <!-- ============================================ -->
+
+    <!-- Màu nền chung của ứng dụng -->
+    <color name="background_light">#F1F3F4</color>
+    <!-- Màu nền vùng hiển thị kết quả -->
+    <color name="display_bg">#FFFFFF</color>
+
+    <!-- Nút số (0-9, dấu chấm) -->
+    <color name="num_button_bg">#FFFFFF</color>
+    <color name="num_button_text">#3C4043</color>
+
+    <!-- Nút phép toán (+, -, ×, ÷, ^) -->
+    <color name="op_button_bg">#D2E3FC</color>
+    <color name="op_button_text">#1967D2</color>
+
+    <!-- Nút bằng (=) -->
+    <color name="equal_button_bg">#1A73E8</color>
+    <color name="equal_button_text">#FFFFFF</color>
+
+    <!-- Nút Xoá tất cả (C) — MÀU VÀNG theo roadmap -->
+    <color name="clear_button_bg">#FFF3CD</color>
+    <color name="clear_button_text">#856404</color>
+
+    <!-- Nút Xoá 1 ký tự (⌫) — MÀU CAM theo roadmap -->
+    <color name="backspace_button_bg">#FFE0B2</color>
+    <color name="backspace_button_text">#E65100</color>
+
+    <!-- ============================================ -->
+    <!-- Màu cho màn hình giải phương trình bậc 2     -->
+    <!-- ============================================ -->
+    <color name="quadratic_bg">#1A1A2E</color>
+    <color name="quadratic_header">#16213E</color>
+    <color name="quadratic_accent">#4285F4</color>
+    <color name="quadratic_text">#E8EAED</color>
+    <color name="quadratic_hint">#9AA0A6</color>
+
+    <!-- Nút chức năng đặc biệt (PT bậc 2) -->
+    <color name="func_button_bg">#E8F0FE</color>
+    <color name="func_button_text">#1967D2</color>
+
+    <!-- Màu tiện ích -->
+    <color name="orange">#E65100</color>
+    <color name="yellow">#F9A825</color>
+    <color name="gray_dark">#3C4043</color>
+    <color name="gray_light">#E8EAED</color>
+    <color name="blue">#1A73E8</color>
+    <color name="expression_color">#9AA0A6</color>
 </resources>
