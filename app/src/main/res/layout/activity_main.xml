@@ -1,19 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_light"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="8dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- MODE 0: BASIC -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="6dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/display_bg"
+                android:gravity="end|bottom"
+                android:orientation="vertical"
+                android:padding="24dp">
+                <TextView
+                    android:id="@+id/tvExpression"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:maxLines="2"
+                    android:text="0"
+                    android:textColor="@color/expression_color"
+                    android:textSize="28sp" />
+                <TextView
+                    android:id="@+id/tvResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:paddingTop="8dp"
+                    android:text="0"
+                    android:textColor="@color/num_button_text"
+                    android:textSize="52sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- MODE 1: FRACTION -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardElevation="6dp"
+            app:cardCornerRadius="24dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/display_bg"
+                android:padding="16dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Phân số sang thập phân"
+                    android:textColor="@color/num_button_text"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textSize="18sp" />
+                <EditText android:id="@+id/etNumerator" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Tử số" android:textColor="@color/num_button_text" android:textColorHint="@color/expression_color" android:background="@drawable/bg_edit_text_light" android:layout_marginTop="16dp" android:gravity="center" />
+                <EditText android:id="@+id/etDenominator" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Mẫu số" android:textColor="@color/num_button_text" android:textColorHint="@color/expression_color" android:background="@drawable/bg_edit_text_light" android:layout_marginTop="8dp" android:gravity="center" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="16dp">
+                    <Button android:id="@+id/btnConvert" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Chuyển" android:backgroundTint="@color/op_button_bg" android:textColor="@color/op_button_text" android:layout_marginEnd="4dp" />
+                    <Button android:id="@+id/btnClearFraction" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Xoá" android:backgroundTint="@color/clear_button_bg" android:textColor="@color/clear_button_text" android:layout_marginStart="4dp" />
+                </LinearLayout>
+                <TextView android:id="@+id/tvFractionResult" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/num_button_text" android:layout_marginTop="16dp" android:text="Chưa có kết quả" android:gravity="center" android:textSize="18sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- MODE 2: POWER -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardElevation="6dp"
+            app:cardCornerRadius="24dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/display_bg"
+                android:padding="16dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Luỹ thừa &amp; số mũ"
+                    android:textColor="@color/num_button_text"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textSize="18sp" />
+                <EditText android:id="@+id/etBase" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Cơ số" android:textColor="@color/num_button_text" android:textColorHint="@color/expression_color" android:background="@drawable/bg_edit_text_light" android:layout_marginTop="16dp" android:gravity="center" />
+                <EditText android:id="@+id/etExponent" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Số mũ" android:textColor="@color/num_button_text" android:textColorHint="@color/expression_color" android:background="@drawable/bg_edit_text_light" android:layout_marginTop="8dp" android:gravity="center" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="16dp">
+                    <Button android:id="@+id/btnCalcPower" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Tính" android:backgroundTint="@color/op_button_bg" android:textColor="@color/op_button_text" android:layout_marginEnd="4dp" />
+                    <Button android:id="@+id/btnClearPower" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Xoá" android:backgroundTint="@color/clear_button_bg" android:textColor="@color/clear_button_text" android:layout_marginStart="4dp" />
+                </LinearLayout>
+                <TextView android:id="@+id/tvPowerResult" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/num_button_text" android:layout_marginTop="16dp" android:text="Chưa có kết quả" android:gravity="center" android:textSize="18sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- MODE 3: QUADRATIC -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardElevation="6dp"
+            app:cardCornerRadius="24dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/display_bg"
+                android:padding="16dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Giải phương trình bậc 2"
+                    android:textColor="@color/num_button_text"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/tvEquationPreview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ax² + bx + c = 0"
+                    android:textColor="@color/expression_color"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:layout_marginTop="4dp" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="16dp">
+                    <EditText android:id="@+id/etA" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:hint="a" android:textColor="@color/num_button_text" android:textColorHint="@color/expression_color" android:background="@drawable/bg_edit_text_light" android:gravity="center" />
+                    <EditText android:id="@+id/etB" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:hint="b" android:textColor="@color/num_button_text" android:textColorHint="@color/expression_color" android:background="@drawable/bg_edit_text_light" android:gravity="center" android:layout_marginHorizontal="8dp" />
+                    <EditText android:id="@+id/etC" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:hint="c" android:textColor="@color/num_button_text" android:textColorHint="@color/expression_color" android:background="@drawable/bg_edit_text_light" android:gravity="center" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="16dp">
+                    <Button android:id="@+id/btnSolve" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Giải" android:backgroundTint="@color/op_button_bg" android:textColor="@color/op_button_text" android:layout_marginEnd="4dp" />
+                    <Button android:id="@+id/btnClearQuadratic" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Xoá" android:backgroundTint="@color/clear_button_bg" android:textColor="@color/clear_button_text" android:layout_marginStart="4dp" />
+                </LinearLayout>
+                <TextView android:id="@+id/tvQuadraticResult" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/num_button_text" android:layout_marginTop="16dp" android:gravity="center" android:text="Chưa có kết quả" android:textSize="18sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- MODE 4: LINEAR -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardElevation="6dp"
+            app:cardCornerRadius="24dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@color/display_bg"
+                android:padding="16dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Giải phương trình bậc 1"
+                    android:textColor="@color/num_button_text"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/tvLinearPreview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ax + b = 0"
+                    android:textColor="@color/expression_color"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:layout_marginTop="4dp" />
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="16dp">
+                    <EditText android:id="@+id/etLinearA" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:hint="a" android:textColor="@color/num_button_text" android:textColorHint="@color/expression_color" android:background="@drawable/bg_edit_text_light" android:gravity="center" android:layout_marginEnd="4dp" />
+                    <EditText android:id="@+id/etLinearB" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:hint="b" android:textColor="@color/num_button_text" android:textColorHint="@color/expression_color" android:background="@drawable/bg_edit_text_light" android:gravity="center" android:layout_marginStart="4dp" />
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="16dp">
+                    <Button android:id="@+id/btnSolveLinear" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Giải" android:backgroundTint="@color/op_button_bg" android:textColor="@color/op_button_text" android:layout_marginEnd="4dp" />
+                    <Button android:id="@+id/btnClearLinear" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="Xoá" android:backgroundTint="@color/clear_button_bg" android:textColor="@color/clear_button_text" android:layout_marginStart="4dp" />
+                </LinearLayout>
+                <TextView android:id="@+id/tvLinearResult" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/num_button_text" android:layout_marginTop="16dp" android:gravity="center" android:text="Chưa có kết quả" android:textSize="18sp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </ViewFlipper>
+
+    <!-- KEYBOARD -->
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:padding="4dp">
+        <Button android:id="@+id/btnClear" style="@style/SpecialButtonStyle" android:text="C" android:layout_columnSpan="2" android:layout_gravity="fill" />
+        <Button android:id="@+id/btnBackspace" style="@style/SpecialButtonStyle" android:text="⌫" />
+        <Button android:id="@+id/btnDivide" style="@style/OpButtonStyle" android:text="÷" />
+        <Button android:id="@+id/btn7" style="@style/NumButtonStyle" android:text="7" />
+        <Button android:id="@+id/btn8" style="@style/NumButtonStyle" android:text="8" />
+        <Button android:id="@+id/btn9" style="@style/NumButtonStyle" android:text="9" />
+        <Button android:id="@+id/btnMultiply" style="@style/OpButtonStyle" android:text="×" />
+        <Button android:id="@+id/btn4" style="@style/NumButtonStyle" android:text="4" />
+        <Button android:id="@+id/btn5" style="@style/NumButtonStyle" android:text="5" />
+        <Button android:id="@+id/btn6" style="@style/NumButtonStyle" android:text="6" />
+        <Button android:id="@+id/btnSubtract" style="@style/OpButtonStyle" android:text="-" />
+        <Button android:id="@+id/btn1" style="@style/NumButtonStyle" android:text="1" />
+        <Button android:id="@+id/btn2" style="@style/NumButtonStyle" android:text="2" />
+        <Button android:id="@+id/btn3" style="@style/NumButtonStyle" android:text="3" />
+        <Button android:id="@+id/btnAdd" style="@style/OpButtonStyle" android:text="+" />
+        <Button android:id="@+id/btnMenu" style="@style/FuncButtonStyle" android:text="Menu" />
+        <Button android:id="@+id/btn0" style="@style/NumButtonStyle" android:text="0" />
+        <Button android:id="@+id/btnDot" style="@style/NumButtonStyle" android:text="." />
+        <Button android:id="@+id/btnEqual" style="@style/OpButtonStyle" android:text="=" />
+    </GridLayout>
+</LinearLayout>

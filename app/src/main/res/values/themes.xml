@@ -1,9 +1,71 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- ============================================ -->
+    <!-- Theme chính của ứng dụng                     -->
+    <!-- ============================================ -->
     <style name="Base.Theme.CalculatorSimple" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Thanh trạng thái cùng màu nền -->
+        <item name="android:statusBarColor">@color/background_light</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Theme.CalculatorSimple" parent="Base.Theme.CalculatorSimple" />
+
+    <!-- ============================================ -->
+    <!-- Style cho các nút số (0-9, dấu chấm)        -->
+    <!-- Nền trắng, chữ xám đen, bo tròn góc 16dp    -->
+    <!-- ============================================ -->
+    <style name="NumButtonStyle" parent="Widget.Material3.Button.TonalButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">68dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:backgroundTint">@color/num_button_bg</item>
+        <item name="android:textColor">@color/num_button_text</item>
+        <item name="cornerRadius">16dp</item>
+    </style>
+
+    <!-- ============================================ -->
+    <!-- Style cho các nút phép toán (+, -, ×, ÷, ^)  -->
+    <!-- Nền xanh nhạt, chữ xanh đậm                 -->
+    <!-- ============================================ -->
+    <style name="OpButtonStyle" parent="Widget.Material3.Button.TonalButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">68dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:backgroundTint">@color/op_button_bg</item>
+        <item name="android:textColor">@color/op_button_text</item>
+        <item name="cornerRadius">16dp</item>
+    </style>
+
+    <!-- ============================================ -->
+    <!-- Style cho nút đặc biệt (C, ⌫)              -->
+    <!-- Màu nền/chữ được set inline trong layout     -->
+    <!-- ============================================ -->
+    <style name="SpecialButtonStyle" parent="Widget.Material3.Button.TonalButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">68dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:textSize">18sp</item>
+        <item name="cornerRadius">16dp</item>
+    </style>
+
+    <!-- ============================================ -->
+    <!-- Style cho nút chức năng (PT bậc 2)           -->
+    <!-- Nền xanh rất nhạt, chữ nhỏ hơn              -->
+    <!-- ============================================ -->
+    <style name="FuncButtonStyle" parent="Widget.Material3.Button.TonalButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">68dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:backgroundTint">@color/func_button_bg</item>
+        <item name="android:textColor">@color/func_button_text</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>
