@@ -30,49 +30,45 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class MainActivity extends AppCompatActivity {
 
-    // ============================================
-    // HẰNG SỐ CHẾ ĐỘ
-    // ============================================
     private static final int MODE_CALC = 0;
     private static final int MODE_FRACTION = 1;
     private static final int MODE_POWER = 2;
     private static final int MODE_QUADRATIC = 3;
     private static final int MODE_LINEAR = 4;
 
-    // ============================================
+
     // BIẾN CHUNG
-    // ============================================
+
     private ViewFlipper viewFlipper;
     private int currentMode = MODE_CALC;
 
-    // — Chế độ Máy tính cơ bản —
+    //  Chế độ máy tính cơ bản
     private TextView tvExpression, tvResult;
     private StringBuilder expression = new StringBuilder();
     private CalculatorEngine engine = new CalculatorEngine();
     private boolean justCalculated = false;
 
-    // — Chế độ Phân số —
+    //  chế độ phân số
     private EditText etNumerator, etDenominator;
     private TextView tvFractionResult;
 
-    // — Chế độ Luỹ thừa —
+    //  chế độ lũy thừa
     private EditText etBase, etExponent;
     private TextView tvPowerResult;
 
-    // — Chế độ Phương trình bậc 1 —
+    //  chế độ Phương trình bậc 1
     private EditText etLinearA, etLinearB;
     private TextView tvLinearResult, tvLinearPreview;
 
-    // — Chế độ Phương trình bậc 2 —
+    //  chế độ phương trình bậc 2
     private EditText etA, etB, etC;
     private TextView tvQuadraticResult, tvEquationPreview;
 
     /** EditText đang được focus hiện tại (dùng cho chế độ nâng cao) */
     private EditText currentFocusedEditText = null;
 
-    // ============================================
-    // KHỞI TẠO
-    // ============================================
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,9 +89,9 @@ public class MainActivity extends AppCompatActivity {
         setSpecialClickListeners();
     }
 
-    // ============================================
-    // KHỞI TẠO VIEW + TẮT BÀN PHÍM ẢO
-    // ============================================
+
+
+
 
     private void initCalculatorViews() {
         tvExpression = findViewById(R.id.tvExpression);
@@ -107,11 +103,11 @@ public class MainActivity extends AppCompatActivity {
         etDenominator = findViewById(R.id.etDenominator);
         tvFractionResult = findViewById(R.id.tvFractionResult);
 
-        // Tắt bàn phím ảo, dùng bàn phím của ứng dụng
+
         disableSoftKeyboard(etNumerator);
         disableSoftKeyboard(etDenominator);
 
-        // Theo dõi focus
+
         setupFocusTracking(etNumerator);
         setupFocusTracking(etDenominator);
 
@@ -310,19 +306,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Tắt bàn phím ảo (soft keyboard) cho EditText.
-     * Người dùng sẽ dùng bàn phím trên giao diện ứng dụng để nhập liệu.
-     */
+
     private void disableSoftKeyboard(EditText editText) {
         editText.setShowSoftInputOnFocus(false);
         editText.setRawInputType(InputType.TYPE_CLASS_NUMBER);
     }
 
-    /**
-     * Theo dõi focus của EditText: khi EditText được nhấn vào,
-     * cập nhật biến currentFocusedEditText để bàn phím biết nhập vào đâu.
-     */
+
     private void setupFocusTracking(EditText editText) {
         editText.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) {
@@ -337,7 +327,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    /** Ẩn bàn phím ảo */
+
     private void hideSoftKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         View focused = getCurrentFocus();
@@ -346,15 +336,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // ============================================
-    // CHUYỂN ĐỔI CHẾ ĐỘ
-    // ============================================
+
+    // chuyển chế độ
+
 
     private void switchMode(int mode) {
         currentMode = mode;
         viewFlipper.setDisplayedChild(mode);
 
-        // Đặt focus mặc định khi chuyển chế độ
+
         switch (mode) {
             case MODE_FRACTION:
                 etNumerator.requestFocus();
@@ -378,9 +368,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // ============================================
-    // BÀN PHÍM: NÚT SỐ (0-9) VÀ DẤU CHẤM (.)
-    // ============================================
+
 
     private void setNumericClickListeners() {
         View.OnClickListener listener = view -> {
@@ -388,10 +376,10 @@ public class MainActivity extends AppCompatActivity {
             String text = b.getText().toString();
 
             if (currentMode == MODE_CALC) {
-                // Chế độ máy tính: nhập vào biểu thức
+
                 handleCalcNumericInput(text);
             } else {
-                // Chế độ nâng cao: nhập vào EditText đang focus
+
                 insertTextToFocusedEditText(text);
             }
         };
@@ -406,11 +394,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * Nhập ký tự vào EditText đang được focus.
-     * Chèn tại vị trí con trỏ hiện tại.
-     * Xử lý: không cho nhập 2 dấu chấm, cho phép dấu trừ đầu.
-     */
+
     private void insertTextToFocusedEditText(String text) {
         if (currentFocusedEditText == null) return;
 
@@ -418,10 +402,10 @@ public class MainActivity extends AppCompatActivity {
         int cursorPos = currentFocusedEditText.getSelectionStart();
         if (cursorPos < 0) cursorPos = current.length();
 
-        // Không cho nhập 2 dấu chấm
+
         if (text.equals(".") && current.contains(".")) return;
 
-        // Chèn text tại vị trí con trỏ
+
         String newText = current.substring(0, cursorPos) + text + current.substring(cursorPos);
         currentFocusedEditText.setText(newText);
         currentFocusedEditText.setSelection(cursorPos + text.length());
@@ -457,9 +441,7 @@ public class MainActivity extends AppCompatActivity {
         return parts.length == 0 ? "" : parts[parts.length - 1];
     }
 
-    // ============================================
-    // BÀN PHÍM: PHÉP TOÁN
-    // ============================================
+
 
     private void setOperatorClickListeners() {
         View.OnClickListener listener = view -> {
@@ -515,9 +497,7 @@ public class MainActivity extends AppCompatActivity {
         return c == '+' || c == '-' || c == '×' || c == '÷';
     }
 
-    // ============================================
-    // BÀN PHÍM: NÚT ĐẶC BIỆT (C, ⌫, =, Menu)
-    // ============================================
+
 
     private void setSpecialClickListeners() {
 
@@ -576,7 +556,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // === NÚT = ===
+
         findViewById(R.id.btnEqual).setOnClickListener(v -> {
             switch (currentMode) {
                 case MODE_CALC:
@@ -609,9 +589,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btnMenu).setOnClickListener(v -> showAdvancedMenu());
     }
 
-    // ============================================
-    // MENU TÍNH NĂNG NÂNG CAO
-    // ============================================
+
 
     private void showAdvancedMenu() {
         String[] menuItems = {
@@ -637,9 +615,7 @@ public class MainActivity extends AppCompatActivity {
                 .show();
     }
 
-    // ============================================
-    // CẬP NHẬT HIỂN THỊ (Máy tính cơ bản)
-    // ============================================
+
 
     private void updateDisplay() {
         String text = expression.toString();
@@ -667,9 +643,6 @@ public class MainActivity extends AppCompatActivity {
         return expr;
     }
 
-    // ============================================
-    // LOGIC: PHÂN SỐ → THẬP PHÂN
-    // ============================================
 
     private void convertFraction() {
         String sNum = etNumerator.getText().toString().trim();
@@ -710,9 +683,7 @@ public class MainActivity extends AppCompatActivity {
         return a;
     }
 
-    // ============================================
-    // LOGIC: LUỸ THỪA & SỐ MŨ
-    // ============================================
+
 
     private void calculatePower() {
         String sBase = etBase.getText().toString().trim();
@@ -728,8 +699,7 @@ public class MainActivity extends AppCompatActivity {
             double result = Math.pow(base, exponent);
 
             StringBuilder sb = new StringBuilder();
-            sb.append("Hiển thị: ").append(formatNum(base)).append(" ^ ").append(formatNum(exponent));
-            sb.append("\n\n");
+
 
             if (Double.isNaN(result)) {
                 sb.append("❌ Không thể tính");
@@ -737,14 +707,7 @@ public class MainActivity extends AppCompatActivity {
                 sb.append("❌ Số quá lớn (tràn số)");
             } else {
                 sb.append("Kết quả: ").append(formatResult(result));
-                if (exponent == Math.floor(exponent) && exponent > 0 && exponent <= 5) {
-                    int n = (int) exponent;
-                    sb.append("\n📌 = ");
-                    for (int i = 0; i < n; i++) {
-                        if (i > 0) sb.append(" × ");
-                        sb.append(formatNum(base));
-                    }
-                }
+
             }
             showAnimatedResult(tvPowerResult, sb.toString());
         } catch (NumberFormatException e) {
@@ -752,9 +715,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // ============================================
-    // LOGIC: GIẢI PHƯƠNG TRÌNH BẬC 2
-    // ============================================
+
 
     private void solveQuadratic() {
         String sA = etA.getText().toString().trim();
@@ -804,9 +765,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // ============================================
-    // LOGIC: GIẢI PHƯƠNG TRÌNH BẬC 1
-    // ============================================
+
 
     private void solveLinear() {
         String sA = etLinearA.getText().toString().trim();
@@ -836,9 +795,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // ============================================
-    // TIỆN ÍCH
-    // ============================================
+
 
     private void showAnimatedResult(TextView tv, String text) {
         AlphaAnimation fadeIn = new AlphaAnimation(0f, 1f);

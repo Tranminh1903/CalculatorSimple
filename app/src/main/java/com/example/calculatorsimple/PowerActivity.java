@@ -74,8 +74,6 @@ public class PowerActivity extends AppCompatActivity {
 
             // Xây dựng chuỗi kết quả
             StringBuilder sb = new StringBuilder();
-            sb.append("📐 Phép tính: ").append(formatNum(base))
-                    .append(" ^ ").append(formatNum(exponent)).append("\n\n");
 
             // Kiểm tra kết quả hợp lệ
             if (Double.isNaN(result)) {
@@ -86,17 +84,6 @@ public class PowerActivity extends AppCompatActivity {
                 sb.append("✅ Kết quả:\n");
                 sb.append(formatNum(base)).append("^").append(formatNum(exponent));
                 sb.append(" = ").append(formatResult(result));
-
-                // Hiển thị giải thích cho số mũ nguyên dương nhỏ
-                if (exponent == Math.floor(exponent) && exponent > 0 && exponent <= 5) {
-                    int n = (int) exponent;
-                    sb.append("\n\n📌 Nghĩa là: ");
-                    for (int i = 0; i < n; i++) {
-                        if (i > 0) sb.append(" × ");
-                        sb.append(formatNum(base));
-                    }
-                    sb.append(" = ").append(formatResult(result));
-                }
             }
 
             showResult(sb.toString());
