@@ -28,7 +28,7 @@ Một ứng dụng máy tính đa năng trên nền tảng Android, cung cấp g
 
 ## 💻 Cài đặt & Chạy ứng dụng
 
-1. Clone repository này về máy tính của bạn:
+1. Clone repository này về máy tính:
    ```bash
    git clone <repository-url>
    ```
@@ -37,7 +37,6 @@ Một ứng dụng máy tính đa năng trên nền tảng Android, cung cấp g
 4. Nhấn **Run** (mũi tên xanh lá hoặc `Shift + F10`) để cài đặt và chạy ứng dụng lên máy ảo Simulator hoặc thiết bị Android thật.
 
 ## 📝 Roadmap dự án
-Quá trình xây dựng app đã trải qua nhiều giai đoạn như thiết kế UI lõi, viết Engine giải chuỗi, xử lý Số thập phân, và cài đặt các chức năng nâng cao (Luỹ thừa, PT Bậc 2). Bạn có thể xem chi tiết tài liệu [ROADMAP.md](./ROADMAP.md) để biết thêm thông tin.
+Quá trình xây dựng app đã trải qua nhiều giai đoạn như thiết kế UI lõi, viết Engine giải chuỗi, xử lý Số thập phân, và cài đặt các chức năng nâng cao (Luỹ thừa, PT Bậc 2). Có thể xem chi tiết tài liệu [ROADMAP.md](./ROADMAP.md) để biết thêm thông tin.
 
 ---
-*Ứng dụng được thiết kế và xây dựng trong khuôn khổ thực hành môn học Lập trình Thiết bị Di động (Android).*
