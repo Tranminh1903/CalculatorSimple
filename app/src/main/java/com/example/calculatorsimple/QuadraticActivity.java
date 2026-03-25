@@ -64,7 +64,7 @@ public class QuadraticActivity extends AppCompatActivity {
 
 
         if (sA.isEmpty() || sB.isEmpty() || sC.isEmpty()) {
-            Toast.makeText(this, "⚠️ Vui lòng nhập đầy đủ hệ số a, b, c", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vui lòng nhập đầy đủ hệ số a, b, c", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -117,7 +117,7 @@ public class QuadraticActivity extends AppCompatActivity {
             showResultWithAnimation(resultText.toString());
 
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "⚠️ Lỗi: Hệ số phải là số hợp lệ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Lỗi: Hệ số phải là số hợp lệ", Toast.LENGTH_SHORT).show();
         }
     }
 

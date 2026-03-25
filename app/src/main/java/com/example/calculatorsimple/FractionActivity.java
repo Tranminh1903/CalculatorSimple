@@ -23,7 +23,6 @@ public class FractionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fraction);
 
-        // Ánh xạ view
         etNumerator = findViewById(R.id.etNumerator);
         etDenominator = findViewById(R.id.etDenominator);
         btnConvert = findViewById(R.id.btnConvert);
@@ -31,7 +30,6 @@ public class FractionActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         tvResult = findViewById(R.id.tvFractionResult);
 
-        // Sự kiện click
         btnConvert.setOnClickListener(v -> convert());
         btnClearForm.setOnClickListener(v -> clearForm());
         btnBack.setOnClickListener(v -> finish());
@@ -67,7 +65,6 @@ public class FractionActivity extends AppCompatActivity {
             sb.append(" Kết quả thập phân:\n");
             sb.append(formatResult(result));
 
-            // Nếu là phân số tối giản, hiển thị thêm
             if (numerator == Math.floor(numerator) && denominator == Math.floor(denominator)) {
                 long num = (long) numerator;
                 long den = (long) denominator;

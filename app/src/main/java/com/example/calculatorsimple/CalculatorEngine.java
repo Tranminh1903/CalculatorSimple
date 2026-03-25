@@ -6,7 +6,6 @@ import java.util.List;
 
 public class CalculatorEngine {
 
-    // Hằng số thông báo lỗi
     private static final String ERROR_DIVISION_BY_ZERO = "Lỗi: Chia cho 0";
     private static final String ERROR_INVALID_EXPRESSION = "Lỗi: Biểu thức không hợp lệ";
     private static final String ERROR_OVERFLOW = "Lỗi: Số quá lớn";
