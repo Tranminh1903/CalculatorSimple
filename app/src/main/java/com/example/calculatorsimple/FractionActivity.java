@@ -8,10 +8,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+
 public class FractionActivity extends AppCompatActivity {
 
+
     private EditText etNumerator, etDenominator;
+
     private Button btnConvert, btnClearForm, btnBack;
+
     private TextView tvResult;
 
     @Override
@@ -31,12 +35,13 @@ public class FractionActivity extends AppCompatActivity {
         btnBack.setOnClickListener(v -> finish());
     }
 
+
     private void convert() {
         String sNum = etNumerator.getText().toString().trim();
         String sDen = etDenominator.getText().toString().trim();
 
         if (sNum.isEmpty() || sDen.isEmpty()) {
-            Toast.makeText(this, "⚠️ Vui lòng nhập đầy đủ tử số và mẫu số",
+            Toast.makeText(this, " Vui lòng nhập đầy đủ tử số và mẫu số",
                     Toast.LENGTH_SHORT).show();
             return;
         }
@@ -45,17 +50,19 @@ public class FractionActivity extends AppCompatActivity {
             double numerator = Double.parseDouble(sNum);
             double denominator = Double.parseDouble(sDen);
 
+
             if (denominator == 0) {
-                showResult("❌ Lỗi: Mẫu số không được bằng 0");
+                showResult(" Lỗi: Mẫu số không được bằng 0");
                 return;
             }
 
             double result = numerator / denominator;
 
+
             StringBuilder sb = new StringBuilder();
             sb.append("📐 Phân số: ").append(formatNum(numerator))
                     .append(" / ").append(formatNum(denominator)).append("\n\n");
-            sb.append("✅ Kết quả thập phân:\n");
+            sb.append(" Kết quả thập phân:\n");
             sb.append(formatResult(result));
 
             if (numerator == Math.floor(numerator) && denominator == Math.floor(denominator)) {
@@ -63,7 +70,7 @@ public class FractionActivity extends AppCompatActivity {
                 long den = (long) denominator;
                 long gcd = gcd(Math.abs(num), Math.abs(den));
                 if (gcd > 1) {
-                    sb.append("\n\n📌 Rút gọn: ")
+                    sb.append("\n\n Rút gọn: ")
                             .append(num / gcd).append("/").append(den / gcd)
                             .append(" = ").append(formatResult(result));
                 }
@@ -72,10 +79,11 @@ public class FractionActivity extends AppCompatActivity {
             showResult(sb.toString());
 
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "⚠️ Lỗi: Vui lòng nhập số hợp lệ",
+            Toast.makeText(this, " Lỗi: Vui lòng nhập số hợp lệ",
                     Toast.LENGTH_SHORT).show();
         }
     }
+
 
     private long gcd(long a, long b) {
         while (b != 0) {
@@ -86,6 +94,7 @@ public class FractionActivity extends AppCompatActivity {
         return a;
     }
 
+
     private void showResult(String text) {
         AlphaAnimation fadeIn = new AlphaAnimation(0f, 1f);
         fadeIn.setDuration(400);
@@ -94,6 +103,7 @@ public class FractionActivity extends AppCompatActivity {
         tvResult.startAnimation(fadeIn);
     }
 
+
     private void clearForm() {
         etNumerator.setText("");
         etDenominator.setText("");
@@ -101,12 +111,14 @@ public class FractionActivity extends AppCompatActivity {
         etNumerator.requestFocus();
     }
 
+
     private String formatNum(double d) {
         if (d == Math.floor(d) && !Double.isInfinite(d) && Math.abs(d) < 1e15) {
             return String.format("%d", (long) d);
         }
         return String.valueOf(d);
     }
+
 
     private String formatResult(double d) {
         if (d == Math.floor(d) && !Double.isInfinite(d) && Math.abs(d) < 1e15) {

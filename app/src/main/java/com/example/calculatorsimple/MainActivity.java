@@ -23,27 +23,37 @@ public class MainActivity extends AppCompatActivity {
     private static final int MODE_QUADRATIC = 3;
     private static final int MODE_LINEAR = 4;
 
+
+    // BIẾN CHUNG
+
     private ViewFlipper viewFlipper;
     private int currentMode = MODE_CALC;
 
+    //  Chế độ máy tính cơ bản
     private TextView tvExpression, tvResult;
     private StringBuilder expression = new StringBuilder();
     private CalculatorEngine engine = new CalculatorEngine();
     private boolean justCalculated = false;
 
+    //  chế độ phân số
     private EditText etNumerator, etDenominator;
     private TextView tvFractionResult;
 
+    //  chế độ lũy thừa
     private EditText etBase, etExponent;
     private TextView tvPowerResult;
 
+    //  chế độ Phương trình bậc 1
     private EditText etLinearA, etLinearB;
     private TextView tvLinearResult, tvLinearPreview;
 
+    //  chế độ phương trình bậc 2
     private EditText etA, etB, etC;
     private TextView tvQuadraticResult, tvEquationPreview;
 
     private EditText currentFocusedEditText = null;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +73,10 @@ public class MainActivity extends AppCompatActivity {
         setSpecialClickListeners();
     }
 
+
+
+
+
     private void initCalculatorViews() {
         tvExpression = findViewById(R.id.tvExpression);
         tvResult = findViewById(R.id.tvResult);
@@ -73,8 +87,11 @@ public class MainActivity extends AppCompatActivity {
         etDenominator = findViewById(R.id.etDenominator);
         tvFractionResult = findViewById(R.id.tvFractionResult);
 
+
         disableSoftKeyboard(etNumerator);
         disableSoftKeyboard(etDenominator);
+
+
         setupFocusTracking(etNumerator);
         setupFocusTracking(etDenominator);
 
@@ -225,10 +242,12 @@ public class MainActivity extends AppCompatActivity {
         if (tvLinearPreview != null) tvLinearPreview.setText(eq.toString());
     }
 
+
     private void disableSoftKeyboard(EditText editText) {
         editText.setShowSoftInputOnFocus(false);
         editText.setRawInputType(InputType.TYPE_CLASS_NUMBER);
     }
+
 
     private void setupFocusTracking(EditText editText) {
         editText.setOnFocusChangeListener((v, hasFocus) -> {
@@ -243,15 +262,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     private void hideSoftKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         View focused = getCurrentFocus();
         if (imm != null && focused != null) imm.hideSoftInputFromWindow(focused.getWindowToken(), 0);
     }
 
+
+    // chuyển chế độ
+
+
     private void switchMode(int mode) {
         currentMode = mode;
         viewFlipper.setDisplayedChild(mode);
+
+
         switch (mode) {
             case MODE_FRACTION:
                 etNumerator.requestFocus();
@@ -275,24 +301,37 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+
     private void setNumericClickListeners() {
         View.OnClickListener listener = view -> {
             Button b = (Button) view;
             String text = b.getText().toString();
-            if (currentMode == MODE_CALC) handleCalcNumericInput(text);
-            else insertTextToFocusedEditText(text);
+
+            if (currentMode == MODE_CALC) {
+
+                handleCalcNumericInput(text);
+            } else {
+
+                insertTextToFocusedEditText(text);
+            }
         };
 
         int[] ids = { R.id.btn0, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9, R.id.btnDot };
         for (int id : ids) findViewById(id).setOnClickListener(listener);
     }
 
+
     private void insertTextToFocusedEditText(String text) {
         if (currentFocusedEditText == null) return;
         String current = currentFocusedEditText.getText().toString();
         int cursorPos = currentFocusedEditText.getSelectionStart();
         if (cursorPos < 0) cursorPos = current.length();
+
+
         if (text.equals(".") && current.contains(".")) return;
+
+
         String newText = current.substring(0, cursorPos) + text + current.substring(cursorPos);
         currentFocusedEditText.setText(newText);
         currentFocusedEditText.setSelection(cursorPos + text.length());
@@ -324,6 +363,8 @@ public class MainActivity extends AppCompatActivity {
         String[] parts = expression.toString().split("[+\\-×÷]");
         return parts.length == 0 ? "" : parts[parts.length - 1];
     }
+
+
 
     private void setOperatorClickListeners() {
         View.OnClickListener listener = view -> {
@@ -357,7 +398,11 @@ public class MainActivity extends AppCompatActivity {
         updateDisplay();
     }
 
-    private boolean isOperator(char c) { return c == '+' || c == '-' || c == '×' || c == '÷'; }
+    private boolean isOperator(char c) {
+        return c == '+' || c == '-' || c == '×' || c == '÷';
+    }
+
+
 
     private void setSpecialClickListeners() {
         findViewById(R.id.btnClear).setOnClickListener(v -> {
@@ -384,6 +429,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         findViewById(R.id.btnEqual).setOnClickListener(v -> {
             switch (currentMode) {
                 case MODE_CALC:
@@ -407,6 +453,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btnMenu).setOnClickListener(v -> showAdvancedMenu());
     }
 
+
+
     private void showAdvancedMenu() {
         String[] menuItems = { "Giải phương trình bậc 1", "Giải phương trình bậc 2", "Luỹ thừa & số mũ", "Phân số sang thập phân", "Trở về (Máy tính cơ bản)" };
         new AlertDialog.Builder(this).setTitle("Tính năng nâng cao").setItems(menuItems, (dialog, which) -> {
@@ -420,7 +468,12 @@ public class MainActivity extends AppCompatActivity {
         }).setNegativeButton("Đóng", null).show();
     }
 
-    private void updateDisplay() { tvExpression.setText(expression.length() == 0 ? "0" : expression.toString()); }
+
+
+    private void updateDisplay() {
+        String text = expression.toString();
+        tvExpression.setText(text.isEmpty() ? "0" : text);
+    }
 
     private void updatePreview() {
         if (expression.length() == 0) { tvResult.setText("0"); return; }
@@ -441,13 +494,14 @@ public class MainActivity extends AppCompatActivity {
         return expr;
     }
 
+
     private void convertFraction() {
         String sNum = etNumerator.getText().toString().trim();
         String sDen = etDenominator.getText().toString().trim();
-        if (sNum.isEmpty() || sDen.isEmpty()) { Toast.makeText(this, "⚠️ Nhập đầy đủ tử số và mẫu số", Toast.LENGTH_SHORT).show(); return; }
+        if (sNum.isEmpty() || sDen.isEmpty()) { Toast.makeText(this, "Nhập đầy đủ tử số và mẫu số", Toast.LENGTH_SHORT).show(); return; }
         try {
             double num = Double.parseDouble(sNum), den = Double.parseDouble(sDen);
-            if (den == 0) { showAnimatedResult(tvFractionResult, "❌ Lỗi: Mẫu số không được bằng 0"); return; }
+            if (den == 0) { showAnimatedResult(tvFractionResult, "Lỗi: Mẫu số không được bằng 0"); return; }
             double result = num / den;
             StringBuilder sb = new StringBuilder();
             sb.append("Hiển thị: ").append(formatNum(num)).append(" / ").append(formatNum(den)).append("\n\nKết quả: ").append(formatResult(result));
@@ -456,56 +510,87 @@ public class MainActivity extends AppCompatActivity {
                 if (g > 1) sb.append("\n📌 Rút gọn: ").append(n / g).append("/").append(d / g);
             }
             showAnimatedResult(tvFractionResult, sb.toString());
-        } catch (NumberFormatException e) { Toast.makeText(this, "⚠️ Số không hợp lệ", Toast.LENGTH_SHORT).show(); }
+        } catch (NumberFormatException e) { Toast.makeText(this, "Số không hợp lệ", Toast.LENGTH_SHORT).show(); }
     }
 
-    private long gcd(long a, long b) { while (b != 0) { long t = b; b = a % b; a = t; } return a; }
+    private long gcd(long a, long b) {
+        while (b != 0) { long t = b; b = a % b; a = t; }
+        return a;
+    }
+
+
 
     private void calculatePower() {
         String sBase = etBase.getText().toString().trim(), sExp = etExponent.getText().toString().trim();
-        if (sBase.isEmpty() || sExp.isEmpty()) { Toast.makeText(this, "⚠️ Nhập đầy đủ cơ số và số mũ", Toast.LENGTH_SHORT).show(); return; }
+        if (sBase.isEmpty() || sExp.isEmpty()) { Toast.makeText(this, "Nhập đầy đủ cơ số và số mũ", Toast.LENGTH_SHORT).show(); return; }
         try {
             double base = Double.parseDouble(sBase), exponent = Double.parseDouble(sExp), result = Math.pow(base, exponent);
             StringBuilder sb = new StringBuilder();
-            sb.append("Hiển thị: ").append(formatNum(base)).append(" ^ ").append(formatNum(exponent)).append("\n\n");
-            if (Double.isNaN(result)) sb.append("❌ Không thể tính");
-            else if (Double.isInfinite(result)) sb.append("❌ Số quá lớn (tràn số)");
-            else {
+
+
+            if (Double.isNaN(result)) {
+                sb.append("Không thể tính");
+            } else if (Double.isInfinite(result)) {
+                sb.append("Số quá lớn (tràn số)");
+            } else {
                 sb.append("Kết quả: ").append(formatResult(result));
-                if (exponent == Math.floor(exponent) && exponent > 0 && exponent <= 5) {
-                    int n = (int) exponent; sb.append("\n📌 = ");
-                    for (int i = 0; i < n; i++) { if (i > 0) sb.append(" × "); sb.append(formatNum(base)); }
-                }
+
             }
             showAnimatedResult(tvPowerResult, sb.toString());
-        } catch (NumberFormatException e) { Toast.makeText(this, "⚠️ Số không hợp lệ", Toast.LENGTH_SHORT).show(); }
+        } catch (NumberFormatException e) { Toast.makeText(this, "Số không hợp lệ", Toast.LENGTH_SHORT).show(); }
     }
+
+
 
     private void solveQuadratic() {
         String sA = etA.getText().toString().trim(), sB = etB.getText().toString().trim(), sC = etC.getText().toString().trim();
-        if (sA.isEmpty() || sB.isEmpty() || sC.isEmpty()) { Toast.makeText(this, "⚠️ Nhập đầy đủ hệ số a, b, c", Toast.LENGTH_SHORT).show(); return; }
+        if (sA.isEmpty() || sB.isEmpty() || sC.isEmpty()) { Toast.makeText(this, "Nhập đầy đủ hệ số a, b, c", Toast.LENGTH_SHORT).show(); return; }
         try {
             double a = Double.parseDouble(sA), b = Double.parseDouble(sB), c = Double.parseDouble(sC);
             if (a == 0) {
-                String res = (b == 0) ? (c == 0 ? "⚠️ Vô số nghiệm" : "⚠️ Vô nghiệm") : "⚠️ Bậc 1: x = " + formatResult(-c / b);
+                String res = (b == 0) ? (c == 0 ? "Vô số nghiệm" : "Vô nghiệm") : "Bậc 1: x = " + formatResult(-c / b);
                 showAnimatedResult(tvQuadraticResult, res); return;
             }
             double delta = b * b - 4 * a * c; StringBuilder sb = new StringBuilder(); sb.append("Δ = ").append(formatResult(delta)).append("\n\n");
             if (delta > 0) { double x1 = (-b + Math.sqrt(delta)) / (2 * a), x2 = (-b - Math.sqrt(delta)) / (2 * a); sb.append("Kết quả: 2 nghiệm phân biệt\nx₁ = ").append(formatResult(x1)).append("\nx₂ = ").append(formatResult(x2)); }
             else if (delta == 0) sb.append("Kết quả: Nghiệm kép\nx = ").append(formatResult(-b / (2 * a)));
-            else sb.append("❌ Vô nghiệm thực (Δ < 0)");
+            else sb.append("Vô nghiệm thực (Δ < 0)");
             showAnimatedResult(tvQuadraticResult, sb.toString());
-        } catch (NumberFormatException e) { Toast.makeText(this, "⚠️ Số không hợp lệ", Toast.LENGTH_SHORT).show(); }
+        } catch (NumberFormatException e) { Toast.makeText(this, "Số không hợp lệ", Toast.LENGTH_SHORT).show(); }
     }
+
+
 
     private void solveLinear() {
         String sA = etLinearA.getText().toString().trim(), sB = etLinearB.getText().toString().trim();
-        if (sA.isEmpty() || sB.isEmpty()) { Toast.makeText(this, "⚠️ Nhập đầy đủ hệ số a, b", Toast.LENGTH_SHORT).show(); return; }
+        if (sA.isEmpty() || sB.isEmpty()) { Toast.makeText(this, "Nhập đầy đủ hệ số a, b", Toast.LENGTH_SHORT).show(); return; }
         try {
-            double a = Double.parseDouble(sA), b = Double.parseDouble(sB);
-            if (a == 0) showAnimatedResult(tvLinearResult, b == 0 ? "Kết quả: Vô số nghiệm" : "Kết quả: Vô nghiệm");
-            else showAnimatedResult(tvLinearResult, "Kết quả: x = " + formatResult(-b / a));
-        } catch (NumberFormatException e) { Toast.makeText(this, "⚠️ Số không hợp lệ", Toast.LENGTH_SHORT).show(); }
+            double a = Double.parseDouble(sA);
+            double b = Double.parseDouble(sB);
+
+            if (a == 0) {
+                if (b == 0) {
+                    showAnimatedResult(tvLinearResult, "Kết quả: Vô số nghiệm");
+                } else {
+                    showAnimatedResult(tvLinearResult, "Kết quả: Vô nghiệm");
+                }
+            } else {
+                double x = -b / a;
+                showAnimatedResult(tvLinearResult, "Kết quả: x = " + formatResult(x));
+            }
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Số không hợp lệ", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+
+    private void showAnimatedResult(TextView tv, String text) {
+        AlphaAnimation fadeIn = new AlphaAnimation(0f, 1f);
+        fadeIn.setDuration(300);
+        fadeIn.setFillAfter(true);
+        tv.setText(text);
+        tv.startAnimation(fadeIn);
     }
 
     private void showAnimatedResult(TextView tv, String text) { AlphaAnimation fadeIn = new AlphaAnimation(0f, 1f); fadeIn.setDuration(300); fadeIn.setFillAfter(true); tv.setText(text); tv.startAnimation(fadeIn); }

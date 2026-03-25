@@ -48,33 +48,21 @@ public class PowerActivity extends AppCompatActivity {
             double result = Math.pow(base, exponent);
 
             StringBuilder sb = new StringBuilder();
-            sb.append("📐 Phép tính: ").append(formatNum(base))
-                    .append(" ^ ").append(formatNum(exponent)).append("\n\n");
 
             if (Double.isNaN(result)) {
-                sb.append("❌ Lỗi: Không thể tính (VD: số âm mũ thập phân)");
+                sb.append("Lỗi: Không thể tính (VD: số âm mũ thập phân)");
             } else if (Double.isInfinite(result)) {
-                sb.append("❌ Lỗi: Kết quả quá lớn (tràn số)");
+                sb.append("Lỗi: Kết quả quá lớn (tràn số)");
             } else {
-                sb.append("✅ Kết quả:\n");
+                sb.append("Kết quả:\n");
                 sb.append(formatNum(base)).append("^").append(formatNum(exponent));
                 sb.append(" = ").append(formatResult(result));
-
-                if (exponent == Math.floor(exponent) && exponent > 0 && exponent <= 5) {
-                    int n = (int) exponent;
-                    sb.append("\n\n📌 Nghĩa là: ");
-                    for (int i = 0; i < n; i++) {
-                        if (i > 0) sb.append(" × ");
-                        sb.append(formatNum(base));
-                    }
-                    sb.append(" = ").append(formatResult(result));
-                }
             }
 
             showResult(sb.toString());
 
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "⚠️ Lỗi: Vui lòng nhập số hợp lệ",
+            Toast.makeText(this, "Lỗi: Vui lòng nhập số hợp lệ",
                     Toast.LENGTH_SHORT).show();
         }
     }
